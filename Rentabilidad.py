@@ -6,27 +6,27 @@ import matplotlib.pyplot as plt
 conn = sqlite3.connect("../Northwind.db")
 
 #Peticion para devolver los productos mas rentables
-# query = '''
-#     SELECT ProductName, sum(Price * Quantity) AS Revenue
-#     FROM OrderDetails od
-#     JOIN Products p ON p.ProductID = od.ProductID
-# 	GROUP BY od.ProductID
-# 	ORDER BY Revenue DESC
-# 	LIMIT 10
-# '''
+query = '''
+    SELECT ProductName, sum(Price * Quantity) AS Revenue
+    FROM OrderDetails od
+    JOIN Products p ON p.ProductID = od.ProductID
+	GROUP BY od.ProductID
+	ORDER BY Revenue DESC
+	LIMIT 10
+'''
 
 
 # #Top 10 de Productos mas rentables
-# #La propiedad de pandas read_sql_query, nos permite crear automaticamente el cursor, abre y cierra las consulatas que hagamos
-# top_products = pd.read_sql_query(query, conn)
+#La propiedad de pandas read_sql_query, nos permite crear automaticamente el cursor, abre y cierra las consulatas que hagamos
+top_products = pd.read_sql_query(query, conn)
 
-# top_products.plot(x="ProductName", y="Revenue", kind="bar", figsize=(10, 5), legend=False)
+top_products.plot(x="ProductName", y="Revenue", kind="bar", figsize=(10, 5), legend=False)
 
-# plt.title("Los 10 Productos mas Rentables")
-# plt.xlabel("Product Name")
-# plt.ylabel("Revenue")
-# plt.xticks(rotation=90) #Con esto me rota los nombres de productos 90grados, quedan verticales
-# plt.show()
+plt.title("Los 10 Productos mas Rentables")
+plt.xlabel("Product Name")
+plt.ylabel("Revenue")
+plt.xticks(rotation=90) #Con esto me rota los nombres de productos 90grados, quedan verticales
+plt.show()
 
 
 #Top 10 de los Empleados mas efectivos
